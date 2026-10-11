@@ -4,11 +4,7 @@
 
 <p>شناسهٔ تسک: {{ task().id }}</p>
 
-@if (task().isCompleted) {
-  <p>انجام شده ✅</p>
-} @else {
-  <p>در حال انجام ⏳</p>
-}
+<p>{{ task().isCompleted | taskStatus }}</p>
 
 <button (click)="requestToggle()">
   {{ task().isCompleted ? 'شروع دوباره' : 'انجام تسک' }}

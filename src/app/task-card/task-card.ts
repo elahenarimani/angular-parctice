@@ -13,7 +13,7 @@ import { CompletedDirective } from '../completed.directive';
 import { TaskStatusPipe } from '../task-status.pipe';
 @Component({
   selector: 'app-task-card',
-  imports: [CompletedDirective],
+ imports: [CompletedDirective, TaskStatusPipe],
   standalone: true,
   templateUrl: './task-card.html',
 })
