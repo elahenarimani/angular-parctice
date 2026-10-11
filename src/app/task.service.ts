@@ -1,21 +1,24 @@
 import { Injectable, computed, signal } from '@angular/core';
 import { Task } from './task.model';
-
+import { inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
-  private tasksState = signal<Task[]>([
-    { id: 1, title: 'یادگیری Signal', isCompleted: true },
-    { id: 2, title: 'یادگیری نمایش لیست', isCompleted: false },
-    { id: 3, title: 'تمرین انگولار', isCompleted: false },
-    { id: 4, title: 'یادگیری Lifecycle', isCompleted: false },
-  ]);
-
+  private http = inject(HttpClient);
+  private tasksState = signal<Task[]>([]);
+  getTasks(): Observable<Task[]> {
+    return this.http.get<Task[]>('/tasks.json');
+  }
+  setTasks(tasks: Task[]): void {
+    this.tasksState.set(tasks);
+    this.nextId = Math.max(0, ...tasks.map((task) => task.id)) + 1;
+  }
   readonly tasks = this.tasksState.asReadonly();
-
-  readonly completedCount = computed(() =>
-    this.tasksState().filter(task => task.isCompleted).length
+  readonly completedCount = computed(
+    () => this.tasksState().filter((task) => task.isCompleted).length,
   );
 
   private nextId = 5;
@@ -27,16 +30,14 @@ export class TaskService {
       isCompleted: false,
     };
 
-    this.tasksState.update(tasks => [...tasks, newTask]);
+    this.tasksState.update((tasks) => [...tasks, newTask]);
   }
 
   toggleTask(taskId: number): void {
-    this.tasksState.update(tasks =>
-      tasks.map(task =>
-        task.id === taskId
-          ? { ...task, isCompleted: !task.isCompleted }
-          : task
-      )
+    this.tasksState.update((tasks) =>
+      tasks.map((task) =>
+        task.id === taskId ? { ...task, isCompleted: !task.isCompleted } : task,
+      ),
     );
   }
 }

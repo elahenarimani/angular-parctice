@@ -1,3 +1,8 @@
+@if (loading()) {
+<p>در حال دریافت تسک‌ها...</p>
+} @else if (errorMessage()) {
+<p>{{ errorMessage() }}</p>
+} @else {
 <h1>{{ title }}</h1>
 
 <p>تعداد کل: {{ tasks().length }}</p>
@@ -10,14 +15,12 @@
 </button>
 
 @if (showTasks()) {
-  <ul>
-    @for (task of tasks(); track task.id) {
-      <li>
-        <app-task-card
-          [task]="task"
-          (toggleRequested)="toggleTask($event)"
-        />
-      </li>
-    }
-  </ul>
+<ul>
+  @for (task of tasks(); track task.id) {
+  <li>
+    <app-task-card [task]="task" (toggleRequested)="toggleTask($event)" />
+  </li>
+  }
+</ul>
+}
 }
