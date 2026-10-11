@@ -9,6 +9,7 @@ import { TaskCard } from './task-card/task-card';
   imports: [TaskCard],
 })
 export class App {
+
   title = 'لیست تسک‌ها';
   tasks = signal<Task[]>([
     { id: 1, title: 'یادگیری Signal', isCompleted: true },
@@ -16,6 +17,7 @@ export class App {
     { id: 3, title: 'تمرین انگولار', isCompleted: false },
     { id: 4, title: 'یادگیری Lifecycle', isCompleted: false },
   ]);
+  showTasks = signal(true);
   private nextId = 5;
   completedCount = computed(() =>
     this.tasks().filter(task => task.isCompleted).length

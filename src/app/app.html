@@ -2,18 +2,17 @@
 
 <p>تعداد کل تسک‌ها: {{ tasks().length }}</p>
 <p>تعداد انجام‌شده‌ها: {{ completedCount() }}</p>
-
 <button (click)="addTask()">
   افزودن تسک
 </button>
-
+<button (click)="showTasks.update(value => !value)">
+  نمایش / پنهان‌کردن لیست
+</button>
+@if (showTasks()) {
 <ul>
   @for (task of tasks(); track task.id) {
-    <li>
-      <app-task-card
-        [task]="task"
-        (toggleRequested)="toggleTask($event)"
-      />
-    </li>
+  <li>
+    <app-task-card [task]="task" (toggleRequested)="toggleTask($event)" />
+  </li>
   }
-</ul>
+</ul>}
