@@ -1,4 +1,5 @@
 import { Component, inject, signal, OnInit, DestroyRef } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TaskCard } from './task-card/task-card';
 import { TaskService } from './task.service';
 
@@ -6,7 +7,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-root',
-  imports: [TaskCard],
+  imports: [TaskCard, ReactiveFormsModule],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
@@ -16,6 +17,15 @@ export class App implements OnInit {
   errorMessage = signal('');
   title = 'لیست تسک‌ها';
   showTasks = signal(true);
+  taskForm = new FormGroup({
+  title: new FormControl('', {
+    nonNullable: true,
+    validators: [
+      Validators.required,
+      Validators.minLength(3),
+    ],
+  }),
+});
   readonly tasks = this.taskService.tasks;
   readonly completedCount = this.taskService.completedCount;
   private destroyRef = inject(DestroyRef);
@@ -38,8 +48,19 @@ export class App implements OnInit {
       });
   }
   addTask(): void {
-    this.taskService.addTask();
+  const titleControl = this.taskForm.controls.title;
+
+  // فاصله‌های ابتدا و انتها را حذف و اعتبارسنجی را تازه می‌کنیم.
+  titleControl.setValue(titleControl.value.trim());
+
+  if (this.taskForm.invalid) {
+    this.taskForm.markAllAsTouched();
+    return;
   }
+
+  this.taskService.addTask(titleControl.value);
+  this.taskForm.reset();
+}
 
   toggleTask(taskId: number): void {
     this.taskService.toggleTask(taskId);

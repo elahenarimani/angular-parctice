@@ -23,10 +23,10 @@ export class TaskService {
 
   private nextId = 5;
 
-  addTask(): void {
+  addTask(title: string): void {
     const newTask: Task = {
       id: this.nextId++,
-      title: 'تسک جدید',
+      title,
       isCompleted: false,
     };
 
