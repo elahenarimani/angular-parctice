@@ -10,7 +10,7 @@ import {
 
 import { Task } from '../task.model';
 import { CompletedDirective } from '../completed.directive';
-
+import { TaskStatusPipe } from '../task-status.pipe';
 @Component({
   selector: 'app-task-card',
   imports: [CompletedDirective],
