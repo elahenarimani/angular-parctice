@@ -1,4 +1,6 @@
-<h2>{{ task().title }}</h2>
+<h2 [appCompleted]="task().isCompleted">
+  {{ task().title }}
+</h2>
 
 <p>شناسهٔ تسک: {{ task().id }}</p>
 

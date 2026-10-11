@@ -9,9 +9,11 @@ import {
 } from '@angular/core';
 
 import { Task } from '../task.model';
+import { CompletedDirective } from '../completed.directive';
 
 @Component({
   selector: 'app-task-card',
+  imports: [CompletedDirective],
   standalone: true,
   templateUrl: './task-card.html',
 })
