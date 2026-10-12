@@ -1,23 +1,15 @@
 import { Routes } from '@angular/router';
-import { TasksPage } from './tasks-page';
-import { AboutPage } from './about-page';
+import { authRoutes } from './features/auth/auth.routes';
+import { profileRoutes } from './features/profile/profile.routes';
+import { taskRoutes } from './features/tasks/tasks.routes';
+import { aboutRoutes } from './features/about/about.routes';
 
 export const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'tasks',
-    pathMatch: 'full',
-  },
-  {
-    path: 'tasks',
-    component: TasksPage,
-  },
-  {
-    path: 'about',
-    component: AboutPage,
-  },
-  {
-    path: '**',
-    redirectTo: 'tasks',
-  },
+  { path: '', redirectTo: 'tasks', pathMatch: 'full' },
+
+  { path: 'auth', children: authRoutes },
+  { path: 'profile', children: profileRoutes },
+  { path: 'tasks', children: taskRoutes },
+  {path:  'abouts' , children: aboutRoutes},
+  { path: '**', redirectTo: 'tasks' },
 ];

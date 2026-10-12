@@ -5,7 +5,9 @@
 <p>شناسهٔ تسک: {{ task().id }}</p>
 
 <p>{{ task().isCompleted | taskStatus }}</p>
-
+<a [routerLink]="['/tasks', task().id]">
+  مشاهدهٔ جزئیات
+</a>
 <button (click)="requestToggle()">
   {{ task().isCompleted ? 'شروع دوباره' : 'انجام تسک' }}
 </button>

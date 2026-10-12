@@ -1,7 +1,7 @@
 import { Component, inject, signal, OnInit, DestroyRef } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TaskCard } from './task-card/task-card';
-import { TaskService } from './task.service';
+import { TaskCard } from '../task-card/task-card';
+import { TaskService } from '../task.service';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
