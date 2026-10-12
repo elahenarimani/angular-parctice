@@ -1,0 +1,42 @@
+:host {
+  display: block;
+  text-align: start;
+}
+
+label {
+  display: block;
+  margin-block-end: 0.5rem;
+}
+
+input {
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-block-size: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #64748b;
+  border-radius: 0.5rem;
+  background: #fff;
+  color: #0f172a;
+  font: inherit;
+  text-align: start;
+}
+
+input:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+input[aria-invalid='true'] {
+  border-color: #b91c1c;
+}
+
+input:disabled {
+  background: #f1f5f9;
+  cursor: not-allowed;
+}
+
+p {
+  margin-block: 0.5rem 0;
+  color: #b91c1c;
+  font-size: 0.875rem;
+}

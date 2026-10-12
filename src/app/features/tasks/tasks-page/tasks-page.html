@@ -8,24 +8,19 @@
 <p>تعداد کل: {{ tasks().length }}</p>
 <p>تعداد انجام‌شده‌ها: {{ completedCount() }}</p>
 
-<form [formGroup]="taskForm" (ngSubmit)="addTask()">
-  <label for="task-title">عنوان تسک</label>
-
-  <input id="task-title" type="text" formControlName="title" />
-
-  @if (taskForm.controls.title.touched) {
-  @if (taskForm.controls.title.hasError('required')) {
-  <p>عنوان الزامی است.</p>
-  } @else if (taskForm.controls.title.hasError('minlength')) {
-  <p>عنوان باید حداقل ۳ کاراکتر داشته باشد.</p>
-  }
-  }
-
-  <button type="submit">افزودن تسک</button>
+<form dir="rtl" [formGroup]="taskForm" (ngSubmit)="addTask()">
+  <app-input
+    id="task-title"
+    label="عنوان تسک"
+    placeholder="عنوان تسک را بنویسید"
+    formControlName="title"
+    [errorMessage]="titleError"
+  />
+  <app-button type="submit">افزودن تسک</app-button>
 </form>
-<button (click)="toggleList()">
+<app-button variant="secondary" (click)="toggleList()">
   نمایش / پنهان‌کردن لیست
-</button>
+</app-button>
 
 @if (showTasks()) {
 <ul>

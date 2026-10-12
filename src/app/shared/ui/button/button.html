@@ -1,0 +1,11 @@
+<button
+  [type]="type()"
+  [disabled]="disabled() || loading()"
+  [class.secondary]="variant() === 'secondary'"
+  [attr.aria-busy]="loading()"
+>
+  <ng-content />
+  @if (loading()) {
+    <span role="status">در حال انجام...</span>
+  }
+</button>

@@ -2,17 +2,26 @@ import { Component, inject, signal, OnInit, DestroyRef } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TaskCard } from '../task-card/task-card';
 import { TaskService } from '../task.service';
+import { Button } from '../../../shared/ui/button/button';
+import { Input } from '../../../shared/ui/input/input';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-tasks-page',
   standalone: true,
-  imports: [TaskCard, ReactiveFormsModule],
+  imports: [TaskCard, ReactiveFormsModule, Button, Input],
   templateUrl: './tasks-page.html',
   styleUrl: './tasks-page.scss',
 })
 export class TasksPage implements OnInit {
+  get titleError(): string {
+    const control = this.taskForm.controls.title;
+    if (!control.touched) return '';
+    if (control.hasError('required')) return 'عنوان الزامی است.';
+    if (control.hasError('minlength')) return 'عنوان باید حداقل ۳ کاراکتر داشته باشد.';
+    return '';
+  }
   private taskService = inject(TaskService);
   loading = signal(false);
   errorMessage = signal('');
