@@ -16,6 +16,7 @@ import { TaskStatusPipe } from '../task-status.pipe';
  imports: [RouterLink, CompletedDirective, TaskStatusPipe],
   standalone: true,
   templateUrl: './task-card.html',
+  styleUrl: './task-card.scss',
 })
 export class TaskCard implements OnInit, OnChanges, OnDestroy {
   task = input.required<Task>();

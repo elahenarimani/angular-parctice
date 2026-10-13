@@ -3,5 +3,7 @@
   |
   <a routerLink="/abouts">دربارهٔ پروژه</a>
 </nav>
-
+<button mat-flat-button type="button" (click)="toggleTheme()">
+  {{ isDark() ? 'حالت روشن ☀️' : 'حالت تاریک 🌙' }}
+</button>
 <router-outlet />

@@ -1,6 +1,14 @@
 @if (loading()) {
-<p>در حال دریافت تسک‌ها...</p>
-} @else if (errorMessage()) {
+  <div class="skeleton-list" aria-busy="true" aria-label="در حال دریافت تسک‌ها">
+    @for (item of [1, 2, 3]; track item) {
+      <div class="skeleton-card" aria-hidden="true">
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-line"></div>
+        <div class="skeleton skeleton-button"></div>
+      </div>
+    }
+  </div>
+}@else if (errorMessage()) {
 <p>{{ errorMessage() }}</p>
 } @else {
 <h1>{{ title }}</h1>
@@ -9,19 +17,26 @@
 <p>تعداد انجام‌شده‌ها: {{ completedCount() }}</p>
 
 <form dir="rtl" [formGroup]="taskForm" (ngSubmit)="addTask()">
-  <app-input
-    id="task-title"
-    label="عنوان تسک"
-    placeholder="عنوان تسک را بنویسید"
-    formControlName="title"
-    [errorMessage]="titleError"
-  />
-  <app-button type="submit">افزودن تسک</app-button>
+  <mat-form-field appearance="outline">
+    <mat-label>عنوان تسک</mat-label>
+
+    <input matInput id="task-title" placeholder="عنوان تسک را بنویسید" formControlName="title" />
+
+    @if (titleError) {
+    <mat-error>{{ titleError }}</mat-error>
+    }
+  </mat-form-field>
+
+  <button mat-flat-button type="submit" [disabled]="taskForm.invalid">
+    افزودن تسک
+  </button>
 </form>
 <app-button variant="secondary" (click)="toggleList()">
   نمایش / پنهان‌کردن لیست
 </app-button>
-
+<button mat-flat-button type="button">
+  دکمهٔ آزمایشی
+</button>
 @if (showTasks()) {
 <ul>
   @for (task of tasks(); track task.id) {

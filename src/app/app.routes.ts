@@ -10,6 +10,6 @@ export const routes: Routes = [
   { path: 'auth', children: authRoutes },
   { path: 'profile', children: profileRoutes },
   { path: 'tasks', children: taskRoutes },
-  {path:  'abouts' , children: aboutRoutes},
+  { path: 'abouts', children: aboutRoutes },
   { path: '**', redirectTo: 'tasks' },
 ];

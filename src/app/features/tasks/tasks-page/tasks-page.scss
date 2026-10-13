@@ -4,3 +4,52 @@ form {
   max-inline-size: 28rem;
   margin-block-end: 1rem;
 }
+.skeleton-list {
+  display: grid;
+  gap: 12px;
+}
+
+.skeleton-card {
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--mat-sys-surface-container);
+}
+
+.skeleton {
+  border-radius: 6px;
+  background: var(--mat-sys-surface-variant);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.skeleton-title {
+  width: 60%;
+  height: 24px;
+  margin-bottom: 16px;
+}
+
+.skeleton-line {
+  width: 35%;
+  height: 16px;
+  margin-bottom: 20px;
+}
+
+.skeleton-button {
+  width: 110px;
+  height: 36px;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}

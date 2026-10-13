@@ -4,14 +4,21 @@ import { TaskCard } from '../task-card/task-card';
 import { TaskService } from '../task.service';
 import { Button } from '../../../shared/ui/button/button';
 import { Input } from '../../../shared/ui/input/input';
-
+import { MatButtonModule } from '@angular/material/button';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {
+  MatSnackBar,
+  MatSnackBarModule,
+} from '@angular/material/snack-bar';
 @Component({
   selector: 'app-tasks-page',
   standalone: true,
-  imports: [TaskCard, ReactiveFormsModule, Button, Input],
   templateUrl: './tasks-page.html',
+  imports: [TaskCard, ReactiveFormsModule, Button, Input, MatButtonModule, MatFormFieldModule,
+    MatInputModule , MatSnackBarModule,MatProgressSpinnerModule],
   styleUrl: './tasks-page.scss',
 })
 export class TasksPage implements OnInit {
@@ -23,19 +30,20 @@ export class TasksPage implements OnInit {
     return '';
   }
   private taskService = inject(TaskService);
+  private readonly snackBar = inject(MatSnackBar);
   loading = signal(false);
   errorMessage = signal('');
   title = 'لیست تسک‌ها';
   showTasks = signal(true);
   taskForm = new FormGroup({
-  title: new FormControl('', {
-    nonNullable: true,
-    validators: [
-      Validators.required,
-      Validators.minLength(3),
-    ],
-  }),
-});
+    title: new FormControl('', {
+      nonNullable: true,
+      validators: [
+        Validators.required,
+        Validators.minLength(3),
+      ],
+    }),
+  });
   readonly tasks = this.taskService.tasks;
   readonly completedCount = this.taskService.completedCount;
   private destroyRef = inject(DestroyRef);
@@ -58,19 +66,23 @@ export class TasksPage implements OnInit {
       });
   }
   addTask(): void {
-  const titleControl = this.taskForm.controls.title;
+    const titleControl = this.taskForm.controls.title;
 
-  // فاصله‌های ابتدا و انتها را حذف و اعتبارسنجی را تازه می‌کنیم.
-  titleControl.setValue(titleControl.value.trim());
+    // فاصله‌های ابتدا و انتها را حذف و اعتبارسنجی را تازه می‌کنیم.
+    titleControl.setValue(titleControl.value.trim());
 
-  if (this.taskForm.invalid) {
-    this.taskForm.markAllAsTouched();
-    return;
+    if (this.taskForm.invalid) {
+      this.taskForm.markAllAsTouched();
+      return;
+    }
+
+    this.taskService.addTask(titleControl.value);
+    this.snackBar.open('تسک با موفقیت اضافه شد.', undefined, {
+      duration: 3000,
+      direction: 'rtl',
+    });
+    this.taskForm.reset();
   }
-
-  this.taskService.addTask(titleControl.value);
-  this.taskForm.reset();
-}
 
   toggleTask(taskId: number): void {
     this.taskService.toggleTask(taskId);
