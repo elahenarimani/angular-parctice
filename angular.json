@@ -30,6 +30,8 @@
               }
             ],
             "styles": [
+              "node_modules/ng-zorro-antd/style/index.min.css",
+              "node_modules/ng-zorro-antd/button/style/index.min.css",
               "src/styles.scss"
             ]
           },

@@ -1,0 +1,83 @@
+<div class="button-examples">
+  <button nz-button nzType="primary" type="button">
+    اصلی
+  </button><br/>
+
+  <button nz-button nzType="default" type="button">
+    معمولی
+  </button><br/>
+
+  <button nz-button nzType="dashed" type="button">
+    حاشیهٔ خط‌چین
+  </button><br/>
+
+  <button nz-button nzType="text" type="button">
+    متنی
+  </button><br/>
+
+  <button nz-button nzType="link" type="button">
+    ظاهر لینک
+  </button><br/>
+  <p>حالت خطر، غیرفعال و انتظار:</p>
+  <div class="button-examples">
+  <button nz-button nzType="primary" nzDanger type="button">
+    حذف
+  </button>
+
+  <button nz-button nzType="default" nzDanger type="button">
+    حذف با حاشیه
+  </button>
+
+  <button nz-button nzType="primary" disabled type="button">
+    غیرفعال
+  </button>
+
+  <button
+    nz-button
+    nzType="primary"
+    [nzLoading]="loading()"
+    (click)="start()"
+    type="button"
+  >
+    ذخیره
+  </button>
+
+  <button nz-button type="button" (click)="stop()">
+    پایان انتظار
+  </button>
+</div>
+<p>اندازه‌های مختلف:</p>
+<div class="button-examples">
+  <button nz-button nzType="primary" nzSize="small" type="button">
+    کوچک
+  </button>
+
+  <button nz-button nzType="primary" nzSize="default" type="button">
+    متوسط
+  </button>
+
+  <button nz-button nzType="primary" nzSize="large" type="button">
+    بزرگ
+  </button>
+</div>
+<p>شکل گرد و عرض کامل:</p>
+<div class="button-examples">
+  <button nz-button nzType="primary" nzShape="round" type="button">
+    دکمهٔ گرد
+  </button>
+</div>
+
+<button nz-button nzType="primary" nzBlock type="button">
+  دکمه به عرض کامل ظرف
+</button>
+<p>ترکیب ویژگی ها</p>
+<button
+  nz-button
+  nzType="primary"
+  nzSize="large"
+  nzDanger
+  type="button"
+>
+  حذف حساب
+</button>
+</div>

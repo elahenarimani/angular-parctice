@@ -11,5 +11,12 @@ export const routes: Routes = [
   { path: 'profile', children: profileRoutes },
   { path: 'tasks', children: taskRoutes },
   { path: 'abouts', children: aboutRoutes },
+  {
+    path: 'zorro-demo',
+    loadComponent: () =>
+      import('./features/zorro-demo/zorro-demo-page/zorro-demo-page').then(
+        (m) => m.ZorroDemoPage,
+      ),
+  },
   { path: '**', redirectTo: 'tasks' },
 ];
